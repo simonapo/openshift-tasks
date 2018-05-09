@@ -162,6 +162,23 @@
 		<!-- Maven will append the version to the finalName (which is the name 
 			given to the generated war, and hence the context root) -->
 		<finalName>openshift-tasks</finalName>
+		<filters>
+      		<filter>src/main/resources/speed.properties</filter>
+    	</filters>
+    	<resources>
+    		<resource>
+        		<directory>src/main/webapp/WEB-INF</directory>
+        		<filtering>true</filtering>
+      		</resource>
+            <resource>
+        		<directory>src/main/webapp</directory>
+        		<filtering>true</filtering>
+      		</resource>
+            <resource>
+        		<directory>src/main/resources</directory>
+        		<filtering>true</filtering>
+      		</resource>
+    	</resources>
 		<plugins>
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
@@ -351,5 +368,17 @@
 				</plugins>
 			</build>
 		</profile>
+		<profile>
+     		<id>app-slow</id>
+      		<properties>
+        		<app.brake>1000</app.brake>
+      		</properties>
+    	</profile>
+    	<profile>
+     		<id>app-fast</id>
+      		<properties>
+        		<app.brake>0</app.brake>
+      		</properties>
+    	</profile>
 	</profiles>
 </project>
